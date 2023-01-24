@@ -1,4 +1,5 @@
 <?php
+use AfricasTalking\SDK\AfricasTalking;
 error_reporting(0);// dont show unecessary warnings.
 //http://localhost/USSD/africas-time-ussd/ussd.php
 
@@ -36,6 +37,62 @@ if(!empty($_POST)){
     //8. Check if user is available in database. (yes) -> Serve/Show the menu. (No)-> Register user.
     if ($userAvailable && $userAvailable['city']!=NULL && $userAvailable['username']!=NULL){
         //9. Serve/Show the service menu
+
+        //9.a Check that user actually typed something, else demote level and start at home
+        switch($userResponse){
+            case "": //blank
+                if($level==0){
+                    //9.0 Graduate user to next level & serve main menu
+                    $sql9b = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 1)";
+                    $db->query($sql9b);
+
+                    //Serve our service menu
+                    $response = "CON Karibu ".$userAvailable['username']." Please choose a service.\n";
+                    $response .= "1. Send me todays voice tip\n";
+                    $response .= " 2. Please call me!\n";
+					$response .= " 3. Send me Airtime!\n";				    	
+
+			  		// Print the response onto the page so that our gateway can read it
+			  		header('Content-type: text/plain');
+ 			  		echo $response;	
+                }
+                break;
+
+            case "1":
+                if($level==1){
+                    //9c. Send the user todays voice tip via AT SMS API
+
+                }
+                break;
+
+            case "2":
+                if ($level == 1) {
+                    //9d. Call the user and bridge to a sales person
+
+                }
+                break;
+
+            case "3":
+                if ($level == 1) {
+                    //9e. Send user airtime
+                    
+                }
+                break;
+
+            default:
+                if($level==1){
+                    //Return user to Main Menu and demote user's level
+                    $response = "CON You have to choose a service.\n";
+                    $response .= "Press 0 to go back";
+                    //demote user's level
+                    $sqlLevelDemote = "UPDATE session_levels SET level =0 where session_id ='".$sessionId."'";
+                    $db->query($sqlLevelDemote);
+
+                    // Print the response onto the page so that our gateway can read it
+			  		header('Content-type: text/plain');
+                    echo $response;	
+                }
+        }
     }
     else{
 		//10. Register the user

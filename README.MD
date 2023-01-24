@@ -17,3 +17,7 @@
                 phonenumber	varchar(25),	
                 level	tinyint(1)	
             );
+
+3. Install Africas talking using composer:
+
+        composer require africastalking/africastalking
