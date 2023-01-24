@@ -15,9 +15,9 @@ if($db->connect_error){
     //log error to file/db $e->getMessage()
     die("END An error occurred. Please try again");
 }
-else{
-    echo "Connection established successfully.";
-}
+// else{
+//     echo "Connection established successfully.";
+// }
 
 //url -> http://localhost/USSD/africas-time-ussd/dbConnector.php
 ?>
