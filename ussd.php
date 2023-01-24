@@ -48,9 +48,10 @@ if(!empty($_POST)){
 
                     //Serve our service menu
                     $response = "CON Karibu ".$userAvailable['username']." Please choose a service.\n";
-                    $response .= "1. Send me todays voice tip\n";
-                    $response .= " 2. Please call me!\n";
-					$response .= " 3. Send me Airtime!\n";				    	
+                    $response .= "1. Redeem airtime gift\n";
+					$response .= "2. Buy Airtime\n";
+					$response .= "3. Send Messages\n";
+				    	
 
 			  		// Print the response onto the page so that our gateway can read it
 			  		header('Content-type: text/plain');
@@ -60,24 +61,63 @@ if(!empty($_POST)){
 
             case "1":
                 if($level==1){
-                    //9c. Send the user todays voice tip via AT SMS API
+                    //9c. Redeem airtime gift
+					// Graduate user to next level & serve main menu i.e level 2
+					$sql9b = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 2)";
+					$db->query($sql9b);
+
+					//Serve our service menu
+					$response = "CON ".$userAvailable['username'].", Redeem airtime gift \n";
+					$response .= " Enter secret code.\n";	
+
+					// Print the response onto the page so that our gateway can read it
+					header('Content-type: text/plain');
+					echo $response;	
 
                 }
                 break;
 
             case "2":
                 if ($level == 1) {
-                    //9d. Call the user and bridge to a sales person
+                    //9d. Buy Airtime
+					// Graduate user to next level & serve main menu i.e. level 2
+					$sql9e = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 2)";
+					$db->query($sql9e);
+
+					//Serve our service menu
+					$response = "END ".$userAvailable['username'].", You have chosen: \n";
+					$response .= " 3. Send me Airtime! Please wait as we send the airtime\n";	
+
+					// Print the response onto the page so that our gateway can read it
+					header('Content-type: text/plain');
+					echo $response;	
 
                 }
                 break;
 
             case "3":
                 if ($level == 1) {
-                    //9e. Send user airtime
+                    //9e. Send Messages.
+					
                     
                 }
                 break;
+			
+			case "xyz":
+				    //9f. Send user airtime after selecting redeem airtime. "xyz" is the secret code for redeeming airtime.
+					// Graduate user to next level & serve main menu i.e. level 3
+					$sql9f = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 3)";
+					$db->query($sql9f);
+
+					//Serve our service menu
+					$response = "END Dear ".$userAvailable['username'].", You have\n";
+					$response .= " Redeemed Airtime successfully. Please wait.\n";	
+
+					// Print the response onto the page so that our gateway can read it
+					header('Content-type: text/plain');
+					echo $response;	
+					break;
+
 
             default:
                 if($level==1){
