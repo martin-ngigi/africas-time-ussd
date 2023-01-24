@@ -1,5 +1,9 @@
 <?php
+
+require 'vendor/autoload.php'; //NB: MAKE SURE YOU HAVE THIS LINE OF CODE.
+
 use AfricasTalking\SDK\AfricasTalking;
+
 error_reporting(0);// dont show unecessary warnings.
 //http://localhost/USSD/africas-time-ussd/ussd.php
 
@@ -85,8 +89,35 @@ if(!empty($_POST)){
 					$db->query($sql9e);
 
 					//Serve our service menu
-					$response = "END ".$userAvailable['username'].", You have chosen: \n";
-					$response .= " 3. Send me Airtime! Please wait as we send the airtime\n";	
+					$response = "END Dear ".$userAvailable['username'].", You've bought airtime successfully: \n";
+					$response .= "Please wait\n";	
+
+					// Initialize the SDK
+					$AT = new AfricasTalking($username, $apikey); //reference username and apikey from the config.php file
+				
+				
+					// Get the airtime service
+					$airtime  = $AT->airtime();
+				
+					// Set the phone number, currency code and amount in the format below
+					$recipients = [[
+						"phoneNumber"  => $phoneNumber,
+						"currencyCode" => "KES",
+						"amount"       => 5
+					]];
+				
+					try {
+						// That's it, hit send and we'll take care of the rest
+						$results = $airtime->send([
+							"recipients" => $recipients
+						]);
+				
+						#print_r($results);
+						$response .= "Successfully sent airtime."; 
+					} catch(Exception $e) {
+						#echo "Error: ".$e->getMessage();
+						$response .= "Failed to send airtime."; 
+					}
 
 					// Print the response onto the page so that our gateway can read it
 					header('Content-type: text/plain');
@@ -112,6 +143,32 @@ if(!empty($_POST)){
 					//Serve our service menu
 					$response = "END Dear ".$userAvailable['username'].", You have\n";
 					$response .= " Redeemed Airtime successfully. Please wait.\n";	
+
+					// Initialize the SDK
+					$AT = new AfricasTalking($username, $apikey); //reference username and apikey from the config.php file
+				
+					// Get the airtime service
+					$airtime  = $AT->airtime();
+				
+					// Set the phone number, currency code and amount in the format below
+					$recipients = [[
+						"phoneNumber"  => $phoneNumber,
+						"currencyCode" => "KES",
+						"amount"       => 5
+					]];
+				
+					try {
+						// That's it, hit send and we'll take care of the rest
+						$results = $airtime->send([
+							"recipients" => $recipients
+						]);
+				
+						#print_r($results);
+						$response .= "Successfully sent airtime."; 
+					} catch(Exception $e) {
+						#echo "Error: ".$e->getMessage();
+						$response .= "Failed to send airtime."; 
+					}
 
 					// Print the response onto the page so that our gateway can read it
 					header('Content-type: text/plain');
