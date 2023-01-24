@@ -39,7 +39,7 @@ if(!empty($_POST)){
 	$userAvailable=$userQuery->fetch_assoc();
 
     //8. Check if user is available in database. (yes) -> Serve/Show the menu. (No)-> Register user.
-    if ($userAvailable && $userAvailable['city']!=NULL && $userAvailable['username']!=NULL){
+    if ($userAvailable && $userAvailable['stack']!=NULL && $userAvailable['username']!=NULL){
         //9. Serve/Show the service menu
 
         //9.a Check that user actually typed something, else demote level and start at home
@@ -222,8 +222,8 @@ if(!empty($_POST)){
 			        break;
 
 			    case 2:
-			    	//10f. Request fir city again
-					$response = "CON City not supposed to be empty. Please reply with your city \n";
+			    	//10f. Request fir stack again
+					$response = "CON Stack not supposed to be empty. Please reply with your stack \n";
 
 			  		// Print the response onto the page so that our gateway can read it
 			  		header('Content-type: text/plain');
@@ -231,7 +231,7 @@ if(!empty($_POST)){
 			        break;
 
 			    default:
-			    	//10g. Request fir city again
+			    	//10g. Request fir stack again
 					$response = "END Apologies, something went wrong... \n";
 
 			  		// Print the response onto the page so that our gateway can read it
@@ -252,16 +252,16 @@ if(!empty($_POST)){
 			        break;
 
 			    case 1:
-			    	//11b. Update Name, Request for city
+			    	//11b. Update Name, Request for stack
 			        $sql11b = "UPDATE users SET username='".$userResponse."' WHERE phonenumber LIKE '%". $phoneNumber ."%'";
 			        $db->query($sql11b);
 
-			        //11c. We graduate the user to the city level
+			        //11c. We graduate the user to the stack level
 			        $sql11c = "UPDATE session_levels SET level=2 WHERE session_id='".$sessionId."'";
 			        $db->query($sql11c);
 
-			        //We request for the city
-			        $response = "CON Please enter your city";
+			        //We request for the stack
+			        $response = "CON Please enter your stack";
 
 			  		// Print the response onto the page so that our gateway can read it
 			  		header('Content-type: text/plain');
@@ -269,8 +269,8 @@ if(!empty($_POST)){
 			        break;
 
 			    case 2:
-			    	//11d. Update city
-			        $sql11d = "UPDATE users SET city='".$userResponse."' WHERE phonenumber = '". $phoneNumber ."'";
+			    	//11d. Update stack
+			        $sql11d = "UPDATE users SET stack='".$userResponse."' WHERE phonenumber = '". $phoneNumber ."'";
 			        $db->query($sql11d);
 
 			    	//11e. Change level to 0
@@ -278,10 +278,11 @@ if(!empty($_POST)){
 		        	$db->query($sql11e);   
 
 			    	//11f. Serve services menu...
-					$response = "CON Please choose a service.\n";
-					$response .= " 1. Send me todays voice tip.\n";
-					$response .= " 2. Please call me!\n";
-					$response .= " 3. Send me Airtime!\n";				    	
+                    //Serve our service menu
+                    $response = "CON Karibu ".$userAvailable['username']." Please choose a service.\n";
+                    $response .= "1. Redeem airtime gift\n";
+					$response .= "2. Buy Airtime\n";
+					$response .= "3. Send Messages\n";			    	
 
 			  		// Print the response onto the page so that our gateway can read it
 			  		header('Content-type: text/plain');
@@ -289,7 +290,7 @@ if(!empty($_POST)){
 			        break;
 
 			    default:
-			    	//11g. Request for city again
+			    	//11g. Request for stack again
 					$response = "END Apologies, something went wrong... \n";
 
 			  		// Print the response onto the page so that our gateway can read it
