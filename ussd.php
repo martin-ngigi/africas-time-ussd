@@ -45,10 +45,10 @@ if(!empty($_POST)){
         //9.a Check that user actually typed something, else demote level and start at home
         switch($userResponse){
             case "": //blank
-                if($level==0){
-                    //9.0 Graduate user to next level & serve main menu
-                    $sql9b = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 1)";
-                    $db->query($sql9b);
+                if($level==0){ // l0 ... i.e. level 0
+                    //l0 . Graduate user to next level & serve main menu i.e. to level l (l1)
+                    $sql_l0 = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 1)";
+                    $db->query($sql_l0);
 
                     //Serve our service menu
                     $response = "CON Karibu ".$userAvailable['username']." Please choose a service.\n";
@@ -64,11 +64,11 @@ if(!empty($_POST)){
                 break;
 
             case "1":
-                if($level==1){
-                    //9c. Redeem airtime gift
-					// Graduate user to next level & serve main menu i.e level 2
-					$sql9b = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 2)";
-					$db->query($sql9b);
+                if($level==1){ //l1_c1 ... i.e. level 1 choice 1
+                    //l1_c1. Redeem airtime gift
+					// Graduate user to next level & serve main menu i.e level 2 (l2)
+					$sql_l1_c1 = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 2)";
+					$db->query($sql_l1_c1);
 
 					//Serve our service menu
 					$response = "CON ".$userAvailable['username'].", Redeem airtime gift \n";
@@ -82,11 +82,11 @@ if(!empty($_POST)){
                 break;
 
             case "2":
-                if ($level == 1) {
-                    //9d. Buy Airtime
-					// Graduate user to next level & serve main menu i.e. level 2
-					$sql9e = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 2)";
-					$db->query($sql9e);
+                if ($level == 1) {//l1_c2 ... i.e. level 1 choice 2
+                    //l1_c2. Buy Airtime
+					// Graduate user to next level & serve main menu i.e. level 2 (l2)
+					$sql_l1_c2 = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 2)";
+					$db->query($sql_l1_c2);
 
 					//Serve our service menu
 					$response = "END Dear ".$userAvailable['username'].", You've bought airtime successfully: \n";
@@ -127,7 +127,7 @@ if(!empty($_POST)){
                 break;
 
             case "3":
-                if ($level == 1) {
+                if ($level == 1) {//l1_c3 ... i.e. level 1 choice 3
                     //9e. Send Messages.
 					
                     
@@ -135,10 +135,10 @@ if(!empty($_POST)){
                 break;
 			
 			case "xyz":
-				    //9f. Send user airtime after selecting redeem airtime. "xyz" is the secret code for redeeming airtime.
+				    //l2. Send user airtime after selecting redeem airtime. "xyz" is the secret code for redeeming airtime from level 2.
 					// Graduate user to next level & serve main menu i.e. level 3
-					$sql9f = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 3)";
-					$db->query($sql9f);
+					$sql_secrect_code = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 3)";
+					$db->query($sql_secrect_code);
 
 					//Serve our service menu
 					$response = "END Dear ".$userAvailable['username'].", You have\n";
@@ -175,9 +175,8 @@ if(!empty($_POST)){
 					echo $response;	
 					break;
 
-
             default:
-                if($level==1){
+                if($level==1){ //level 1 i.e. l1
                     //Return user to Main Menu and demote user's level
                     $response = "CON You have to choose a service.\n";
                     $response .= "Press 0 to go back";
