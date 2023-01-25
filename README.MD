@@ -25,3 +25,14 @@
 3. Install Africas talking using composer:
 
         composer require africastalking/africastalking
+
+## Images
+- [1](images/1.PNG)
+- [2](images/2.PNG)
+- [3](images/3.PNG)
+- [4](images/4.PNG)
+- [5](images/5.PNG)
+- [6](images/6.PNG)
+- [7](images/7.PNG)
+- [8](images/8.PNG)
+- [9](images/9.PNG)

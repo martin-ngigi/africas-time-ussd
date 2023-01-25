@@ -369,8 +369,8 @@ if(!empty($_POST)){
 			        $sql11d = "UPDATE users SET stack='".$userResponse."' WHERE phonenumber = '". $phoneNumber ."'";
 			        $db->query($sql11d);
 
-			    	//11e. Change level to 0
-		        	$sql11e = "INSERT INTO session_levels(session_id,phoneNumber,level) VALUES('".$sessionId."','".$phoneNumber."',1)";
+			    	//11e. Change level to 1
+		        	$sql11e = "INSERT INTO session_levels(session_id,phoneNumber,level) VALUES('".$sessionId."','".$phoneNumber."',2)";
 		        	$db->query($sql11e);   
 
 			    	//11f. Serve services menu...
