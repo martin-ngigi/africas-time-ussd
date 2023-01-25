@@ -92,7 +92,7 @@ if(!empty($_POST)){
 
 						//Serve our service menu
 						$response = "CON ".$userAvailable['username'].", Redeem airtime gift \n";
-						$response .= " Enter secret code.\n";	
+						$response .= " Enter secret code. i.e. xyz\n";	
 
 						// Print the response onto the page so that our gateway can read it
 						header('Content-type: text/plain');
@@ -184,6 +184,44 @@ if(!empty($_POST)){
 
 						$response = "CON Please.\n";
 						$response .= " Enter the phone number\n";
+
+						// Print the response onto the page so that our gateway can read it
+						header('Content-type: text/plain'); 
+						echo $response;	
+					}
+					else if($userResponse=="xyz"){//l2_cxyz ... i.e. level 2 choice 2
+						//l1_cxyz. Buy Airtime for another number.
+
+						//Serve our service menu
+						$response = "END Dear ".$userAvailable['username'].", You've redeemed airtime.\n";
+						$response .= "Please wait\n";	
+
+						// Initialize the SDK
+						$AT = new AfricasTalking($username, $apikey); //reference username and apikey from the config.php file
+					
+					
+						// Get the airtime service
+						$airtime  = $AT->airtime();
+					
+						// Set the phone number, currency code and amount in the format below
+						$recipients = [[
+							"phoneNumber"  => $phoneNumber,
+							"currencyCode" => "KES",
+							"amount"       => 5
+						]];
+					
+						try {
+							// That's it, hit send and we'll take care of the rest
+							$results = $airtime->send([
+								"recipients" => $recipients
+							]);
+					
+							#print_r($results);
+							$response .= "Successfully sent airtime."; 
+						} catch(Exception $e) {
+							#echo "Error: ".$e->getMessage();
+							$response .= "Failed to send airtime. Try again."; 
+						}
 
 						// Print the response onto the page so that our gateway can read it
 						header('Content-type: text/plain'); 
