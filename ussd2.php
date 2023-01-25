@@ -116,10 +116,20 @@ if(!empty($_POST)){
 					elseif($userResponse=="3"){//l1_c3 ... i.e. level 1 choice 3
 						//l1_c3 Send Messages.
 
-						
+
 					}
 					else{
+						$response = "CON Wrong choice... \n";
+						$response .= "Press 0 to return to main menu. \n";
 
+						// Demote user to previous level & serve main menu i.e. level 1 (l1)
+						$sql_d_l1 = "UPDATE session_levels SET level=1 WHERE session_id='".$sessionId."'";
+						$db->query($sql_d_l1);
+
+						// Print the response onto the page so that our gateway can read it
+						header('Content-type: text/plain');
+						echo $response;	
+					  break;
 					}
 
 			}
