@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2023 at 06:27 PM
+-- Generation Time: Jan 25, 2023 at 04:47 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -178,7 +178,64 @@ INSERT INTO `session_levels` (`session_id`, `phonenumber`, `level`) VALUES
 ('ATUid_9383498a74792611beff358ea38a6182', '+254797292290', 1),
 ('ATUid_0428ed8f47e3572dc801e67c350f729f', '+254797292290', 1),
 ('ATUid_9bba886c2d39f5069c8e14fd8a81219c', '+254797292290', 2),
-('ATUid_9bba886c2d39f5069c8e14fd8a81219c', '+254797292290', 1);
+('ATUid_9bba886c2d39f5069c8e14fd8a81219c', '+254797292290', 1),
+('ATUid_b48ed3ae7d041f924360f2f46f08def5', '+254797292290', 1),
+('ATUid_b48ed3ae7d041f924360f2f46f08def5', '+254797292290', 2),
+('ATUid_b554c86031c44cd567e70863a0a6bdb2', '+254797292290', 1),
+('ATUid_c97767652496bafdc39292d815dd10d2', '+254797292290', 1),
+('ATUid_b554c86031c44cd567e70863a0a6bdb2', '+254797292290', 2),
+('ATUid_6608da9bbcee384d48cf714eaf1cfebc', '+254797292290', 1),
+('ATUid_e460d50d9978ee8e8e50d27e873d33f5', '+254797292290', 1),
+('ATUid_6608da9bbcee384d48cf714eaf1cfebc', '+254797292290', 2),
+('ATUid_6608da9bbcee384d48cf714eaf1cfebc', '+254797292290', 3),
+('ATUid_37ba190b761c03f3a7fa2df10a7141d1', '+254797292290', 1),
+('ATUid_37ba190b761c03f3a7fa2df10a7141d1', '+254797292290', 2),
+('ATUid_62116328772908c6bd61bcef8c9e352f', '+254797292290', 1),
+('ATUid_62116328772908c6bd61bcef8c9e352f', '+254797292290', 2),
+('ATUid_2521ac2b3d63e13b2c0bd3bc8a8203e2', '+254797292290', 1),
+('ATUid_c7afe1e844b949041faf2809c37bf720', '+254797292290', 1),
+('ATUid_c7afe1e844b949041faf2809c37bf720', '+254797292290', 2),
+('ATUid_c7afe1e844b949041faf2809c37bf720', '+254797292290', 2),
+('ATUid_f4b3f9e45ad460915dc7c443afc53eba', '+254797292290', 1),
+('ATUid_f4b3f9e45ad460915dc7c443afc53eba', '+254797292290', 2),
+('ATUid_f4b3f9e45ad460915dc7c443afc53eba', '+254797292290', 2),
+('ATUid_f4b3f9e45ad460915dc7c443afc53eba', '+254797292290', 2),
+('ATUid_1f40cb4f1c65dc2d0cbd8ee6deb654fe', '+254797292290', 1),
+('ATUid_0dbdce7b252ef242e141befce0b04118', '+254797292290', 1),
+('ATUid_0dbdce7b252ef242e141befce0b04118', '+254797292290', 2),
+('ATUid_0dbdce7b252ef242e141befce0b04118', '+254797292290', 2),
+('ATUid_40c37e5332863427f43e2801c5df000b', '+254797292290', 1),
+('ATUid_40c37e5332863427f43e2801c5df000b', '+254797292290', 2),
+('ATUid_40c37e5332863427f43e2801c5df000b', '+254797292290', 2),
+('ATUid_40c37e5332863427f43e2801c5df000b', '+254797292290', 2),
+('ATUid_40c37e5332863427f43e2801c5df000b', '+254797292290', 2),
+('ATUid_40c37e5332863427f43e2801c5df000b', '+254797292290', 3),
+('ATUid_633db4627bce0ffa6347cfe2274054de', '+254797292290', 1),
+('ATUid_633db4627bce0ffa6347cfe2274054de', '+254797292290', 2),
+('ATUid_633db4627bce0ffa6347cfe2274054de', '+254797292290', 2),
+('ATUid_6fab1858799cc75978954a1f54f86fa3', '+254797292290', 1),
+('ATUid_6fab1858799cc75978954a1f54f86fa3', '+254797292290', 2),
+('ATUid_6fab1858799cc75978954a1f54f86fa3', '+254797292290', 2),
+('ATUid_6fab1858799cc75978954a1f54f86fa3', '+254797292290', 2),
+('ATUid_b1e250bacc19d1caea10e8f992e21c8c', '+254797292290', 3),
+('ATUid_e0cb5a176c11341ccffdb1e2be86dfab', '+254797292290', 3),
+('ATUid_05c1dccc2bcafb478a60d349753a8143', '+254797292290', 1),
+('ATUid_05c1dccc2bcafb478a60d349753a8143', '+254797292290', 2),
+('ATUid_e569a1d5f82029a8850eff8bc11bdb94', '+254797292290', 3),
+('ATUid_d21bdc5c8ebd8eb96aef68c0b3477f12', '+254797292290', 3),
+('ATUid_df860939fab410297ababc97dd5f1063', '+254797292290', 2),
+('ATUid_c8f2706e22a45f4416e8ba224a677d2d', '+254797292290', 2),
+('ATUid_59b6754dbef3380e44675fd595cc1672', '+254797292290', 3),
+('ATUid_dd5475263c04c6126004694e247bb3f6', '+254797292290', 2),
+('ATUid_28fe486914e10419e02b05c465728a9e', '+254797292290', 3),
+('ATUid_e979fd4ee05429f5604dd3a07797a34f', '+254797292290', 3),
+('ATUid_1d16e2d951542f784f5d570e3670b467', '+254797292290', 1),
+('ATUid_851292f44c2fca9b81abd3d299dadc68', '+254797292290', 2),
+('ATUid_851292f44c2fca9b81abd3d299dadc68', '+254797292290', 1),
+('ATUid_eae40b1256a08539732a0ef1b799e3ac', '+254797292290', 1),
+('ATUid_eae40b1256a08539732a0ef1b799e3ac', '+254797292290', 2),
+('ATUid_eae40b1256a08539732a0ef1b799e3ac', '+254797292290', 3),
+('ATUid_92736e9b694a57d6e286c4994ecef4ce', '+254797292290', 3);
 
 -- --------------------------------------------------------
 
@@ -190,15 +247,17 @@ CREATE TABLE `users` (
   `username` varchar(30) DEFAULT NULL,
   `phonenumber` varchar(20) DEFAULT NULL,
   `stack` varchar(30) DEFAULT NULL,
-  `status` enum('ACTIVE','SUSPENDED') DEFAULT NULL
+  `status` enum('ACTIVE','SUSPENDED') DEFAULT NULL,
+  `other_phone` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`username`, `phonenumber`, `stack`, `status`) VALUES
-('Martin', '+254797292290', 'Android', NULL);
+INSERT INTO `users` (`username`, `phonenumber`, `stack`, `status`, `other_phone`) VALUES
+('Martin', '+254797292290', 'Android dev', NULL, NULL),
+('Martin', '+254797292290', 'Android dev', NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
