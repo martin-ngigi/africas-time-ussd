@@ -66,7 +66,7 @@ if(!empty($_POST)){
 		}
 		else{ //User typed something.
 			switch ($level) {
-			    case 0:
+			    case 0: //level 0
 					// l0 i.e. level 0
 					//l0 . Graduate user to next level & serve main menu i.e. to level l (l1)
 					$sql_l0_ = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 1)";
@@ -83,7 +83,7 @@ if(!empty($_POST)){
  			  		echo $response;	
 			        break;
 
-				case 1:
+				case 1: //level 1
 					if($userResponse=="1"){//l1_c1 ... i.e. level 1 choice 1
 						//l1_c1. Redeem airtime gift
 						// Graduate user to next level & serve main menu i.e level 2 (l2)
@@ -129,9 +129,81 @@ if(!empty($_POST)){
 						// Print the response onto the page so that our gateway can read it
 						header('Content-type: text/plain');
 						echo $response;	
-					  break;
+					}
+					break;
+
+				case 2: //level 2
+					if($userResponse=="1"){//l2_c1 ... i.e. level 2 choice 1
+						//l2_c1. Buy Airtime for my number.
+						// Graduate user to next level & serve main menu i.e. level 3 (l3)
+						//$sql_l2_c1 = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 3)";
+						$sql_l2_c1 = "UPDATE session_levels SET level=3 WHERE session_id='".$sessionId."'";
+						$db->query($sql_l2_c1);
+
+						//Serve our service menu
+						$response = "END Dear ".$userAvailable['username'].", You've bought airtime successfully: \n";
+						$response .= "Please wait\n";	
+
+						// Initialize the SDK
+						$AT = new AfricasTalking($username, $apikey); //reference username and apikey from the config.php file
+					
+					
+						// Get the airtime service
+						$airtime  = $AT->airtime();
+					
+						// Set the phone number, currency code and amount in the format below
+						$recipients = [[
+							"phoneNumber"  => $phoneNumber,
+							"currencyCode" => "KES",
+							"amount"       => 5
+						]];
+					
+						try {
+							// That's it, hit send and we'll take care of the rest
+							$results = $airtime->send([
+								"recipients" => $recipients
+							]);
+					
+							#print_r($results);
+							$response .= "Successfully sent airtime."; 
+						} catch(Exception $e) {
+							#echo "Error: ".$e->getMessage();
+							$response .= "Failed to send airtime."; 
+						}
+
+						// Print the response onto the page so that our gateway can read it
+						header('Content-type: text/plain');
+						echo $response;	
 					}
 
+					else if($userResponse=="2"){//l2_c2 ... i.e. level 2 choice 2
+						//l1_c2. Buy Airtime for another number.
+						// Graduate user to next level {i.e. level 3 (l3)} & serve main menu 
+						$sql_l2_c2 = "UPDATE session_levels SET level=3 WHERE session_id='".$sessionId."'";
+						$db->query($sql_l2_c2);
+
+						$response = "CON Please.\n";
+						$response .= " Enter the phone number\n";
+
+						// Print the response onto the page so that our gateway can read it
+						header('Content-type: text/plain');
+						echo $response;	
+					}
+					else{
+						$response = "CON Wrong choice... \n";
+						$response .= "Press 0 to return to main menu. \n";
+
+						// Demote user to previous level & serve main menu i.e. level 1 (l1)
+						$sql_d_l1 = "UPDATE session_levels SET level=1 WHERE session_id='".$sessionId."'";
+						$db->query($sql_d_l1);
+
+						// Print the response onto the page so that our gateway can read it
+						header('Content-type: text/plain');
+						echo $response;	
+					}
+
+
+					break;
 			}
 		}
 
