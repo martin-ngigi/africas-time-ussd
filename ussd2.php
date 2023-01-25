@@ -83,6 +83,45 @@ if(!empty($_POST)){
  			  		echo $response;	
 			        break;
 
+				case 1:
+					if($userResponse=="1"){//l1_c1 ... i.e. level 1 choice 1
+						//l1_c1. Redeem airtime gift
+						// Graduate user to next level & serve main menu i.e level 2 (l2)
+						$sql_l1_c1 = "UPDATE session_levels SET level=2 WHERE session_id='".$sessionId."'";
+						$db->query($sql_l1_c1);
+
+						//Serve our service menu
+						$response = "CON ".$userAvailable['username'].", Redeem airtime gift \n";
+						$response .= " Enter secret code.\n";	
+
+						// Print the response onto the page so that our gateway can read it
+						header('Content-type: text/plain');
+						echo $response;	
+
+					}
+					else if($userResponse=="2"){//l1_c2 ... i.e. level 1 choice 2
+						//l1_c2. Buy Airtime
+						// Graduate user to next level & serve main menu i.e. level 2 (l2)
+						$sql_l1_c2 = "UPDATE session_levels SET level=2 WHERE session_id='".$sessionId."'";
+						$db->query($sql_l1_c2);
+
+						$response = "CON Select.\n";
+						$response .= "1. My phone number\n";
+						$response .= "2. Other phone number\n";
+
+						// Print the response onto the page so that our gateway can read it
+						header('Content-type: text/plain');
+						echo $response;	
+					}
+					elseif($userResponse=="3"){//l1_c3 ... i.e. level 1 choice 3
+						//l1_c3 Send Messages.
+
+						
+					}
+					else{
+
+					}
+
 			}
 		}
 
