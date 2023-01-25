@@ -240,8 +240,48 @@ if(!empty($_POST)){
 						echo $response;	
 					}
 
-
 					break;
+
+				case 3://level 3
+					//Update Name, Request for stack
+					$sql_l2_c2_a = "UPDATE users SET other_phone='".$userResponse."' WHERE phonenumber LIKE '%". $phoneNumber ."%'";
+					$db->query($sql_l2_c2_a);
+
+					//10g. Request fir stack again
+					$response = "END Credit sent to phone: \n".$userResponse."\n";
+
+					// Initialize the SDK
+					$AT = new AfricasTalking($username, $apikey); //reference username and apikey from the config.php file
+					
+					// Get the airtime service
+					$airtime  = $AT->airtime();
+				
+					// Set the phone number, currency code and amount in the format below
+					$recipients = [[
+						"phoneNumber"  => $userResponse,
+						"currencyCode" => "KES",
+						"amount"       => 5
+					]];
+				
+					try {
+						// That's it, hit send and we'll take care of the rest
+						$results = $airtime->send([
+							"recipients" => $recipients
+						]);
+				
+						#print_r($results);
+						$response .= "Successfully sent airtime."; 
+					} catch(Exception $e) {
+						#echo "Error: ".$e->getMessage();
+						$response .= "Failed to send airtime. Try again."; 
+					}
+
+
+			  		// Print the response onto the page so that our gateway can read it
+			  		header('Content-type: text/plain');
+ 			  		echo $response;	
+			        break;
+
 			}
 		}
 
