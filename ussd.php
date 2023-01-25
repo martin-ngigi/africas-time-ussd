@@ -79,14 +79,13 @@ if(!empty($_POST)){
 					echo $response;	
 
                 }
-                break;
 
-            case "2":
-                if ($level == 1) {//l1_c2 ... i.e. level 1 choice 2
-                    //l1_c2. Buy Airtime
-					// Graduate user to next level & serve main menu i.e. level 2 (l2)
-					$sql_l1_c2 = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 2)";
-					$db->query($sql_l1_c2);
+				if ($level == 2) {//l2_c1 ... i.e. level 2 choice 1
+                    //l2_c1. Buy Airtime for my number.
+					// Graduate user to next level & serve main menu i.e. level 3 (l3)
+					//$sql_l2_c1 = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 3)";
+					$sql_l2_c1 = "UPDATE session_levels SET level=3 WHERE session_id='".$sessionId."'";
+					$db->query($sql_l2_c1);
 
 					//Serve our service menu
 					$response = "END Dear ".$userAvailable['username'].", You've bought airtime successfully: \n";
@@ -118,6 +117,39 @@ if(!empty($_POST)){
 						#echo "Error: ".$e->getMessage();
 						$response .= "Failed to send airtime."; 
 					}
+
+					// Print the response onto the page so that our gateway can read it
+					header('Content-type: text/plain');
+					echo $response;	
+
+                }
+                break;
+
+            case "2":
+                if ($level == 1) {//l1_c2 ... i.e. level 1 choice 2
+                    //l1_c2. Buy Airtime
+					// Graduate user to next level & serve main menu i.e. level 2 (l2)
+					//$sql_l1_c2 = "INSERT INTO session_levels(session_id, phonenumber, level) VALUES('".$sessionId."', '$phoneNumber', 2)";
+					$sql_l1_c2 = "UPDATE session_levels SET level=2 WHERE session_id='".$sessionId."'";
+					$db->query($sql_l1_c2);
+
+					$response = "CON Select.\n";
+                    $response .= "1. My phone number\n";
+					$response .= "2. Other phone number\n";
+
+					// Print the response onto the page so that our gateway can read it
+					header('Content-type: text/plain');
+					echo $response;	
+
+                }
+				if ($level == 2) {//l2_c2 ... i.e. level 2 choice 2
+                    //l1_c2. Buy Airtime for another number.
+					// Graduate user to next level {i.e. level 3 (l3)} & serve main menu 
+					$sql_l2_c2 = "UPDATE session_levels SET level=3 WHERE session_id='".$sessionId."'";
+					$db->query($sql_l2_c2);
+
+					$response = "CON Please.\n";
+                    $response .= " Enter the phone number\n";
 
 					// Print the response onto the page so that our gateway can read it
 					header('Content-type: text/plain');
