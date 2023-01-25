@@ -186,7 +186,7 @@ if(!empty($_POST)){
 						$response .= " Enter the phone number\n";
 
 						// Print the response onto the page so that our gateway can read it
-						header('Content-type: text/plain');
+						header('Content-type: text/plain'); 
 						echo $response;	
 					}
 					else{
