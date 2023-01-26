@@ -56,7 +56,7 @@ if(!empty($_POST)){
                     $response = "CON Karibu ".$userAvailable['username']." Please choose a service.\n";
                     $response .= "1. Redeem airtime gift\n";
 					$response .= "2. Buy Airtime\n";
-					$response .= "3. Send Messages\n";
+					$response .= "3. Check balance\n";
 				    	
 
 			  		// Print the response onto the page so that our gateway can read it
@@ -76,7 +76,7 @@ if(!empty($_POST)){
                     $response = "CON Karibu ".$userAvailable['username']." Please choose a service.\n";
                     $response .= "1. Redeem airtime gift\n";
 					$response .= "2. Buy Airtime\n";
-					$response .= "3. Send Messages\n";
+					$response .= "3. Check balance\n";
 				    	
 			  		// Print the response onto the page so that our gateway can read it
 			  		header('Content-type: text/plain');
@@ -115,6 +115,39 @@ if(!empty($_POST)){
 					}
 					elseif($userResponse=="3"){//l1_c3 ... i.e. level 1 choice 3
 						//l1_c3 Send Messages.
+
+						$sql_l2_c1 = "UPDATE session_levels SET level=2 WHERE session_id='".$sessionId."'";
+						$db->query($sql_l2_c1);
+
+						//Serve our service menu
+						$response = "END Dear ".$userAvailable['username'].", \n";
+						$response .= "Your balance is: \n";	
+
+						// Initialize the SDK
+						$AT = new AfricasTalking($username, $apikey);
+
+						// Get the application service
+						$application = $AT->application();
+
+						try {
+							// Fetch the application data
+							$data = $application->fetchApplicationData();
+
+							//print_r($data);
+							//$response .= "".json_encode($data);
+
+							$json_response = json_encode($data['data']->UserData, true);
+
+							$response .= $json_response;
+
+						} catch(Exception $e) {
+							//echo "Error: ".$e->getMessage();
+							$response .= "".$e->getMessage();	
+						}
+
+						// Print the response onto the page so that our gateway can read it
+						header('Content-type: text/plain');
+						echo $response;	
 
 
 					}
